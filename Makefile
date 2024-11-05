@@ -1,6 +1,14 @@
-run: main.cpp
-	clang++ -o run.o main.cpp -g
+PROGRAM_NAME = compiledCode
+OBJECT_FILES = $(PROGRAM_NAME).o
+CPPFLAGS = -std=c++23 -g
 
-.PHONY: clean
+$(PROGRAM_NAME): main.cpp
+	clang++ $(CPPFLAGS) -o $(PROGRAM_NAME) main.cpp
+
+.PHONY: clean run
+
 clean:
-	rm -rf *.o *.dSYM/
+	rm -rf *.o *.dSYM $(PROGRAM_NAME)
+
+run: $(PROGRAM_NAME)
+	./$(PROGRAM_NAME) $(ARGS)
